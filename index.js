@@ -18,14 +18,10 @@ app.get("/", (req, res) => {
   res.render("index.ejs", { content: "Waiting for data..." });
 });
 
-app.post("/put-secret", async (req, res) => {
+app.post("/get-city-weather", async (req, res) => {
   const searchId = req.body.id;
   try {
-    const result = await axios.put(
-      API_URL + "/secrets/" + searchId,
-      req.body,
-      config
-    );
+    const result = await axios.get(API_URL + "/secrets/" + searchId, config);
     res.render("index.ejs", { content: JSON.stringify(result.data) });
   } catch (error) {
     res.render("index.ejs", { content: JSON.stringify(error.response.data) });
